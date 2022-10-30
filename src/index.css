@@ -24,6 +24,18 @@
     padding: 10px;
 }
 
+.Red {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: rgb(235, 115, 115);
+}
+
+.Blue {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: lightseagreen;
+}
+
 body {
   margin: 0;
   align-items: center;
