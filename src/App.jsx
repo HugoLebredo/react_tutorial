@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 
 const ContComponent = ({ cont }) => {
   console.log({ cont });
@@ -19,8 +17,9 @@ export default function App() {
       <h1>Primer ejercicio estado</h1>
       <ContComponent cont={contador} />
       <button onClick={() => incrementarContador()}>
-        "Incrementa contador"
+        Incrementa contador
       </button>
+      <h2>Mira la consola</h2>
     </div>
   );
 }
