@@ -1,26 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
+import "./index.css";
 
-const ContComponent = ({ cont }) => {
-  console.log({ cont });
-  return <h2>{`el contador se ha pulsado ${cont} veces`}</h2>;
+const DisplayClicks = ({ cont }) => {
+  console.log(cont);
+  return <h2>{cont}</h2>;
 };
 
+const initState = { left: 0, right: 0, total: 0 };
+
 export default function App() {
-  const [contador, setContador] = useState(0);
+  const [clicks, setClicks] = useState(initState);
 
-  const incrementarContador = (e) => setContador(contador + 1);
+  const handleClickLeft = () => {
+    const newValues = {
+      ...clicks,
+      left: clicks.left + 1,
+      total: clicks.total + 1
+    };
+    setClicks(newValues);
+  };
 
-  console.log({ contador });
+  const handleClickRight = () => {
+    const newValues = {
+      ...clicks,
+      right: clicks.right + 1,
+      total: clicks.total + 1
+    };
+    setClicks(newValues);
+  };
 
   return (
     <div className="App">
-      <h1>Primer ejercicio estado</h1>
-      <ContComponent cont={contador} />
-      <button onClick={() => incrementarContador()}>
-        "Incrementa contador"
-      </button>
+      <h1>Trabajar con estados complejos</h1>
+      <p>
+        {" "}
+        Nuestro estado es un objeto con 3 atributos las funciones handle()
+        aumentan el contador correspondiente y el Total
+        {" "}
+      </p>
+      <p>
+        Chequea la consola!
+      </p>
+      <table className="Table">
+        <td>
+          <DisplayClicks cont={clicks.left} />
+        </td>
+        <td>
+          <button onClick={() => handleClickLeft()}>Left Click</button>
+        </td>
+        <td>
+          <button onClick={() => handleClickRight()}>right Click</button>
+        </td>
+        <td>
+          <DisplayClicks cont={clicks.right} />
+        </td>
+      </table>
+      <h3>{`Total de clicks ${clicks.total}`}</h3>
     </div>
   );
 }
