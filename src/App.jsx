@@ -1,25 +1,44 @@
-import { useState } from 'react'
+import { useState } from "react";
+import "./index.css";
 
-const ContComponent = ({ cont }) => {
-  console.log({ cont });
-  return <h2>{`el contador se ha pulsado ${cont} veces`}</h2>;
+const ContadorClicks = ({ cont }) => {
+  console.log(cont);
+  return <h2>{cont}</h2>;
 };
 
+const initState = { left: 0, right: 0 };
+
 export default function App() {
-  const [contador, setContador] = useState(0);
+  const [clicks, setClicks] = useState(initState);
 
-  const incrementarContador = (e) => setContador(contador + 1);
+  const handleClickLeft = () => {
+    const newValues = { ...clicks, left: clicks.left + 1 };
+    setClicks(newValues);
+  };
 
-  console.log({ contador });
+  const handleClickRight = () => {
+    const newValues = { ...clicks, right: clicks.right + 1 };
+    setClicks(newValues);
+  };
 
   return (
-    <div className="App">
-      <h1>Primer ejercicio estado</h1>
-      <ContComponent cont={contador} />
-      <button onClick={() => incrementarContador()}>
-        Incrementa contador
-      </button>
-      <h2>Mira la consola</h2>
+    <div>
+      <h1>Trabajar con estados complejos</h1>
+      <p>Tenemos 2 estados independientes uno para el click derecho y otro para el izquierdo</p>
+      <table className="App">
+        <td>
+          <ContadorClicks cont={clicks.left} />
+        </td>
+        <td>
+          <button onClick={() => handleClickLeft()}>Left Click</button>
+        </td>
+        <td>
+          <button onClick={() => handleClickRight()}>right Click</button>
+        </td>
+        <td>
+          <ContadorClicks cont={clicks.right} />
+        </td>
+      </table>
     </div>
   );
 }
