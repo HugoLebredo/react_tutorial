@@ -37,6 +37,7 @@ Esa operación la realizamos en la siguiente línea de código. los `...`antes d
 ```javascript
 const newValues = { ...clicks, right: clicks.right + 1 }
 ```
+
 Como la desestructuración se haxce dentro de un objeto el resultado es un nuevo objeto que se almacenará en el estado.
 
 La primera vez es chocante pero cuando se le pilla el truco es bastante sencillo y muy util.
@@ -44,6 +45,18 @@ La primera vez es chocante pero cuando se le pilla el truco es bastante sencillo
 [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio2)
 
 ## Ejercicio 3 
+La curva de dificultad de este ejercicio con respecto al anterior es muy baja. 
+
+El estado es un objeto con 3 atributos que gestionaremos con la funcion handle() apropiada para cada caso. Se debe aumentar el contador correspondiente al botón y siempre el total
+
+```javascript
+{
+    left: 0, 
+    right: 0,
+    total: 0
+}
+```
+
 [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio3)
 
 ## Ejercicio 4 
