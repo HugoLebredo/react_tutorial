@@ -10,7 +10,7 @@ Vamos a hacer unos ejercicios para comprender el funcionamiento del estado de la
 
 | Ejercicio | Descripción | Enlace |
 | -- | -- | -- |
-| **Ejercicio 1** | Reaalizar un contador. | [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio1)|
+| **Ejercicio 1** | Crear un contador. | [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio1)|
 | **Ejercicio 2** | Trabajamos con un objeto en el estado que contendrá dos contadores independientes. | [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio2) |
 | **Ejercicio 3** | Añadimos un tercer contador que se incremente cuando  se puelse cualquier botón. | [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio3) |
 | **Ejercicio 4** | Añadimos dos cosas array al al estado que alamacena el orden de pulsación de los botones y un botón para resetear los contadores | [![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio4) |
