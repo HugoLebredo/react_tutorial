@@ -1,94 +1,60 @@
+# Ejercicio 5
+En ReactJS podemos no solo cambiar el valor que muestra un componente de manera dinámica. También podemos cambiar el estilo de los componentes actualizando las propiedades que reciben como parámetros. Esta práctica se conoce como **renderizado condicional** 
 
-# Tutorial estado de la aplicación ReactJS
+En este ejercicio vamos a cambiar el color de fondo cada vez que se presione el botón.
 
-Vamos a hacer unos ejercicios para comprender el funcionamiento del estado de la aplicación en ReactJS. 
+El funcionamiento es el siguiente. El componente `App` tiene un `className`  (Ojo en React no se utiliza la propiedad `class`. Tenemos que utilizar `className` en su lugar) con el valor "Blue". Es por ese valor que al componente se le asignará el estilo `.Blue` .Puedes ver esa clase en el archivo `index.css`.
 
-- 🌱 En cada rama del repositorio se encuentra el códido de los siguientes ejercicios y puedes ver el ejercicio desplegado clickando en el botón correspondiente.
+## Comportamiento
+Entendamos lo que está pasando.
 
-- 📶 Estos ejercicios tienen una dificultad incremental pero son todos muy siencillos.
-
-## Ejercicio 1 
-Este es el ejercicio más básico que existe para entender el ciclo de vida de ReactJS. Vamos a  programar un contador. El estado almacenará un número que se incrementará cuando pulsemos un botón.
-
-. ♻️ El ciclo es el siguiente:
-1. El componente muestra el valor inicial del componente.
-2. El usuario pulsa el botón
-3. El estado actualiza el valor almacenado
-4. ReactJS detecta que el estado ha cambiado y refresca los componentes que necesitan de ese valor. En este ejercicio solo tenemos un componente y es muy sencillo pero en un formulario o una página compuesta por un conjunto de componentes esta característica dota a ReactJS de una enorme rapidez en el renderizado.
-
-Puedes ver el código desplegado pulsando en este botón.
-
-[![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio1)
-
-## Ejercicio 2 
-En este ejercicio trabajaremos con un estado más complejo que en el ejercicio anterior. Aqui nuestro estado será un objeto con dos valores. left y right. En cada una de esas claves se almacenará un número que se incrementará cuando hagamos click en el botón correspondiente.
+El componente `App` tiene el siguiente estado que almacena un valor booleano. Por defecto se inicializa a `true`.
 
 ```javascript
-{ 
-    left: 0,
-    right: 0,
+const [isBlue, setIsBlue] = useState(true);
+
+```
+
+También tenemos una función encargada de modificar el valor del estado cada vez que presionemos el botón. Asociamos esa función a traves del evento `onClick` del botón (Esto ya deberíamos de tenerlo controlado pero no está de más repasar).
+
+```javascript
+const classColor = isBlue ? "Blue" : "Red";
+
+```
+Esta función tiene sintaxis chunga de javascript para el principiante. Lo que está pasando en esa línea de código es que en la variable classColor estamos guardando una función. Es una función pequeñita, `isBlue ? "Blue" : "Red"` pero es rara. Esto es lo que se conoce como el operador ternario `?` en Javascript. Este operador es un `if` simplificado. A la izquierda del `?` ponemos una condición que queremos comprobar. A la derecha antes de los `:` lo que queremos hacer en este caso es equivalente a `return "Blue` después vienen los `:` que cumple la función de la palabra reservada `else` para a continuación escribir el valor que debe devolverse si no se cumple la condición inicial. En nuestro caso `return "Red"`. 
+
+Recapitulando que esto `` es igual a esto otro:
+
+```javascript
+if (isBlue === true) {
+    return "Blue"
+} else {
+  return "Red"
 }
+
 ```
-
-Aqui introducimos el concepto de la inmutabilidad del estado. Para actualizar el estado no podemos incrementar el contador. Tenemos que volver a construir el objeto con los valores actualizados.
-
-Esa operación la realizamos en la siguiente línea de código. los `...`antes de `clicks` es lo que en javascript se llama desestructuración o destructuring. Es una forma de escritura que nos permite extraer valores de un array o propiedades de un objeto. Basicamente lo que hace es extraer las propiedades que teniamos almacenados en clicks. 
+Pero hasta aquí no hemos cambiado el estado solo devolvemos una cadena de caracteres. Nos falta un paso que está en esta línea:
 
 ```javascript
-const newValues = { ...clicks, right: clicks.right + 1 }
+<button onClick={() => setIsBlue(!isBlue)}>Cambiar color</button>
 ```
 
-Como la desestructuración se haxce dentro de un objeto el resultado es un nuevo objeto que se almacenará en el estado.
+Fijemonos en el evento onClick. Aqui pasan muchas cosas. 
 
-La primera vez es chocante pero cuando se le pilla el truco es bastante sencillo y muy util.
+- Lo primero las `{ }` esas que a priori no pintan nada. Pues **esas llaves son obligatorias cuando en un parámetro de un componente de ReactJS quieras poner cualquier cosa que no sea una cadena de caracteres**. Regla de oro.
 
-[![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio2)
+- Luego `()=>` esto es lo que se llama una **función flecha** o **arrow function**. Le pusieron ese nombre porque `=>`es una flecha. No voy a explicar aqui estas funciones solo tienes que saber que la parte derecha de la flecha se va a ejecutar cada vez que pulsemos click. Es un disparador (no es así pero nos vale para este ejemplo)
 
-## Ejercicio 3 
-La curva de dificultad de este ejercicio con respecto al anterior es muy baja. 
+- Lo ultimo `setIsBlue(!isBlue)` aqui estamos guardando en el estado( Recordamos que guardamos en el estado el parámetro de la función `setIsBlue()`. Si pusieramos `setIsBlue("Hola Mundo")` Guardariamos la cadena de texto más famosa entre los informáticos. Pero aqui lo que almacenamos en el estado es el resultado de la función `IsBlue`  🤯 Flipa!. Nos queda una cosita más y es el `!` que es la negación lógica de Javascript y aqui es donde se cambia el valor. Recuerda que tenemos que **almacenar en el estado** `true` o `false`. No `"Red"` ni `"Blue"`
 
-El estado es un objeto con 3 atributos que gestionaremos con la funcion handle() apropiada para cada caso. Se debe aumentar el contador correspondiente al botón y siempre el total
+Vamos a explicar el ciclo de vida de esta aplicación ♻️:
 
-```javascript
-{
-    left: 0, 
-    right: 0,
-    total: 0
-}
-```
+1. Se renderiza el componente `App()` con el valor del estado `isBlue = true`
+2. Hacemos click en el botó
+3. Se ejecuta la función `setIsBlue()` y le pasamos como argumento *"lo contrario al valor que tenga `isBlue`"* es decir le pasamos `!true` que es en definitiva `false`
+4. Se almacena en el estado  `ìsBlue` el valor `false`.
+5. ReactJS detecta un cambio en el estado y automaticamente refresca los componentes que utilicen el estado `isBlue`.
+6. Al volver a renderizar `App` se ejecuta la función ``. Como `isBlue`es false devuelve el valor `"Red"`
+7. El componente `App` tiene el `className = "Red"` por lo que se carga la clase css correspondiente y el color de fondo ahora es rojo.
 
-[![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio3)
-
-## Ejercicio 4 
-Este ejercicio me parece muy didactico, si lo entendemos habremos asimilado los conceptos básicos del ciclo de vida de un componente de ReactJS. Bien por tí 👍
-
-Vamos a introducir un poco de lógica y ampliar el comportamiento de nuestro estado para que cumpla los siguientes objetivos:
-
-1. Resetear el estado pulsando el botón "Reset Contadores"
-2. Añadiremos un nuevo atributo al estado llamado `traza` en el que se almacenará el orden en el que pulsemos cada uno de los botones que incremetan los contadores. Es decir, `traza` es un array. El estado ahora posee esta forma:
-
-```javascript
-{
-    left: 0, 
-    right: 0,
-    total: 0,
-    traza:[]
-}
-```
-
-Para esto necesitamos trabajar con un array. Trabajar con arrays al igual que con objetos en RectJS tienen la particularidad de que el estado **no es mutable** y eso significa que tendremos de utilizar el *spread operator * (`...`) y reconstruir el array cada vez que queramos actualizar el estado del componente. Podemos ver como se hace esto en las funciones que manejan el estado (`handleClickLeft` y `handleClickRight`), concretamente en las siguientes líneas:
-
-```javascript
-traza: [...clicks.traza, "⬅️"]
-traza: [...clicks.traza, "➡️"]
-```
-Recapitulando. Lo que tenemos que hacer con `traza` es lo siguiente:
-
-- Si pulsamos el botón correspondiente al contador derecho al array se le añadirá el emoji ➡️.
-- Si pulsamos el botón correspondiente al contador izquierdo al array se le añadirá el emoji ⬅️.
-- Si pulsamos el botón "Reset Contadores" el array debe vaciarse.
-
-[![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio4)
-
-## Ejercicio 5 
-[![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio5)
+Si se vuelve a pulsar el botón se cambiaría de nuevo el color a azul
