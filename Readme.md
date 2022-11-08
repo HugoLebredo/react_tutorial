@@ -57,4 +57,7 @@ Vamos a explicar el ciclo de vida de esta aplicación ♻️:
 6. Al volver a renderizar `App` se ejecuta la función ``. Como `isBlue`es false devuelve el valor `"Red"`
 7. El componente `App` tiene el `className = "Red"` por lo que se carga la clase css correspondiente y el color de fondo ahora es rojo.
 
-Si se vuelve a pulsar el botón se cambiaría de nuevo el color a azul
+Si se vuelve a pulsar el botón se cambiaría de nuevo el botón a azul.
+
+[![codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/HugoLebredo/react_tutorial/ejercicio5)
+
